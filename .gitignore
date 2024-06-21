@@ -1,0 +1,4 @@
+node_modules
+firebaseconfig.js
+.env
+package-lock.json
