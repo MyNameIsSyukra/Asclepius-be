@@ -1,6 +1,6 @@
 const { initializeApp } = require("@firebase/app");
 const { getFirestore } = require("@firebase/firestore");
-const { setDoc, doc, addDoc, collection } = require("@firebase/firestore");
+const { setDoc, doc, addDoc, getDocs, collection } = require("@firebase/firestore");
 const firebaseConfig = require("../firebaseconfig");
 
 const app = initializeApp(firebaseConfig);
@@ -18,9 +18,11 @@ const getData = async () => {
   const querySnapshot = await getDocs(collection(db, "results"));
   const data = querySnapshot.docs.map((doc) => ({
     id: doc.id,
-    ...doc.data(),
+    history: doc.data(),
   }));
+  // console.log(data);
   return data;
 };
+// console.log(getData());
 
-module.exports = storeData;
+module.exports = { storeData, getData };
