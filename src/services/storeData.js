@@ -3,6 +3,7 @@ const { getFirestore } = require("@firebase/firestore");
 const { setDoc, doc, addDoc, getDocs, collection } = require("@firebase/firestore");
 const firebaseConfig = require("../firebaseconfig");
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 

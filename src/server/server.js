@@ -24,21 +24,18 @@ const InputError = require("../exceptions/InputError");
   server.ext("onPreResponse", function (request, h) {
     const response = request.response;
 
-    if (response instanceof InputError) {
-      const newResponse = h.response({
-        status: "fail",
-        message: `${response.message} Silakan gunakan foto lain.`,
-      });
-      newResponse.code(response.statusCode);
-      return newResponse;
-    }
-
+    // Check if the response is a Boom error
     if (response.isBoom) {
+      // Create a new response object with custom error format
       const newResponse = h.response({
         status: "fail",
         message: response.message,
       });
-      newResponse.code(response.statusCode);
+
+      // Set the HTTP status code as an integer
+      newResponse.code(response.output.statusCode);
+
+      // Return the new response
       return newResponse;
     }
 
